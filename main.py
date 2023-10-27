@@ -1,6 +1,5 @@
 import logging
 import os
-
 import git
 from git import Repo
 
@@ -18,7 +17,15 @@ def repo_commands(name, relative_path, commands):
         return
 
     for command in commands:
-        execute_git_command(command, repo)
+        if "push" in command:
+            print(f"\nThe following command will be executed: {command}")
+            confirm = input("Are you sure you want to execute this operation? (y/n): ")
+            if confirm == 'y':
+                execute_git_command(command, repo)
+            else:
+                print("Command not executed!")
+        else:
+            execute_git_command(command, repo)
 
 
 def execute_git_command(git_command, repository):
