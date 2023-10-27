@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import git
@@ -28,10 +29,10 @@ def repo_commands(name, relative_path, commands):
             execute_git_command(command, repo)
 
 
-def execute_git_command(git_command, repository):
+def execute_git_command(git_command, repos):
     print("\n#Command: " + git_command)
     try:
-        response = repository.git.execute(git_command)
+        response = repos.git.execute(git_command)
         logging.info(response)
         print(response)
     except git.exc.GitCommandError as e:
@@ -39,33 +40,15 @@ def execute_git_command(git_command, repository):
         return
 
 
+def load_repositories():
+    with open('repositories.json', 'r') as file:
+        return json.load(file)
+
+
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
 
-    # Set here your repositories and commands
-    repositories = [
-        {
-            "name": "new-feature",
-            "path": "../rebase-upstream-test-new-feature",
-            "commands": [
-                "git checkout main",
-                "git pull",
-                # "git fetch upstream",
-                # "git rebase upstream/main",
-                # "git push --force",
-                # "git checkout dev",
-                # "git rebase main",
-                "git push --force"
-            ]
-        },
-        {
-            "name": "original",
-            "path": "../rebase-upstream-test-original",
-            "commands": [
-
-            ]
-        }
-    ]
+    repositories = load_repositories()
 
     while True:
         print("--- Git Automation ---")

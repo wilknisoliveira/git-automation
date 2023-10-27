@@ -1,13 +1,33 @@
 # Installing dependencies
 ```pip install -r requirements.txt```
 
-# Run
-```python main.py```
-
 # Setting the repositories
-Update the following array in the code: repositories = []
+Update the file repositories.json with the following structure:
 
-# Improvements
+```
+[
+    {
+        "name": "Create a tag name to the repository",
+        "path": "../relativePath",
+        "commands": [
+            "git status",
+            "git command 2",
+            "git command 3"
+        ]
+    },
+    {
+        "name": "Create a tag name to the repository",
+        "path": "../relativePath",
+        "commands": [
+            "git status",
+            "git command 2",
+            "git command 3"
+        ]
+    },
+    ...
+]
+```
 
-- Interface
-- File for path configuration to replace repositories variable
+# Run
+Open the terminal in the current folder and execute this command:
+```python main.py```

@@ -1,0 +1,18 @@
+[
+    {
+        "name": "new-feature",
+        "path": "../rebase-upstream-test-new-feature",
+        "commands": [
+            "git checkout main",
+            "git pull",
+            "git push --force"
+        ]
+    },
+    {
+        "name": "original",
+        "path": "../rebase-upstream-test-original",
+        "commands": [
+
+        ]
+    }
+]
