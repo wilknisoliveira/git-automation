@@ -18,6 +18,8 @@ def repo_commands(name, relative_path, commands):
         return
 
     for command in commands:
+        verify_rebase_state(repo)
+
         if "push" in command or "clean" in command:
             print(f"\nThe following command will be executed: {command}")
             confirm = input("Are you sure you want to execute this operation? (y/n): ")
@@ -35,6 +37,7 @@ def execute_git_command(git_command, repos):
         response = repos.git.execute(git_command)
         logging.info(response)
         print(response)
+
     except git.exc.GitCommandError as e:
         print(f"Error:\n {e}")
         return
@@ -43,6 +46,13 @@ def execute_git_command(git_command, repos):
 def load_repositories():
     with open('repositories.json', 'r') as file:
         return json.load(file)
+
+
+def verify_rebase_state(repos):
+    response = repos.git.execute("git status")
+
+    if "CONFLICT" in response or "interactive rebase in progress" in response:
+        raise Exception("Rebasing running. Resolve the conflicts manually!")
 
 
 if __name__ == '__main__':
