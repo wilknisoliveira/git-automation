@@ -2,7 +2,7 @@
 ```pip install -r requirements.txt```
 
 # Setting the repositories
-Update the file repositories.json with the following structure:
+Create a file called repositories.json with the following structure:
 
 ```
 [

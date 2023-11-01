@@ -18,7 +18,7 @@ def repo_commands(name, relative_path, commands):
         return
 
     for command in commands:
-        if "push" in command:
+        if "push" in command or "clean" in command:
             print(f"\nThe following command will be executed: {command}")
             confirm = input("Are you sure you want to execute this operation? (y/n): ")
             if confirm == 'y':
